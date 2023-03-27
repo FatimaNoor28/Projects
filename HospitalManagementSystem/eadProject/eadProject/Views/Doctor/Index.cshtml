@@ -1,0 +1,52 @@
+﻿@*tag helper*@
+@model List<eadProject.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Doctor";
+}
+
+<section id="appointment" class="appointment section-bg">
+    <div class="container">
+        <div class="section-title">
+            <h2>Your Record</h2>
+            <div class="row">
+                @if (Model != null)
+                {
+                <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Appointment ID</th>
+                                <th scope="col">Patient ID</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Time</th>
+                            </tr>
+                        </thead>
+
+                        @foreach (Appointment a in Model)
+                        {
+                            <tbody>
+                                <tr>
+                                    <th scope="row">@a.AppointmentId</th>
+                                    <td>@a.PatientId</td>
+                                    <td>@a.Date <p>/</p> @a.Month <p>/2023</p></td>
+                                    <td>@a.time</td>
+                                </tr>
+                            </tbody>
+                        }
+
+                        </table>
+                    }
+            </div>
+            <a href="/Home/Index">Go Back to Home Page </a>
+
+        </div>
+    </div>
+</section>
+
+@if(ViewData["DoctorUserName"]!=null){
+@section LoginReplacement
+    {
+
+    <h>  @ViewData["DoctorUserName"] </h>
+     }
+}

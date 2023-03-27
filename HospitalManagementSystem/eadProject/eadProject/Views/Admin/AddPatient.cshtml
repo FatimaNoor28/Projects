@@ -1,0 +1,79 @@
+﻿@using eadProject.Models
+@model eadProject.Models.Patient
+
+<script>
+
+    function PatientAdd() {
+        var formData = $("#patientForm").serialize();
+        console.log(formData);
+        $.ajax({
+            type: "POST",
+            url: "/Admin/AddPatient",
+            data: formData,
+            contentType: "application/json; charset:utf-8",
+            success: function (res) { console.log(res); },
+            error: function (err) { console.log(err); }
+        });
+    }
+
+</script>
+
+
+    <section id="appointment" class="appointment section-bg">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Add Patient</h2>
+            </div>
+
+            <form  method="post"  id="patientForm">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="row form-row">
+                    
+                    <div class="col-md-4 form-group mt-3 mt-md-0 ">
+                        <label asp-for="CNIC" class="label">Enter Patient CNIC</label> 
+                        <input type="text" id="CNIC" asp-for="CNIC" class="form-control" />
+                        <span asp-validation-for="CNIC"></span>
+                    </div>
+                    <div class="col-md-4 form-group mt-3 mt-md-0 form-col">
+                        <label asp-for="Name" class="label">Enter Patient Name</label>   
+                        <input type="text" id="name" asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                </div>
+                <div class="row centre form-row">
+                    <div class="col-md-4 form-group mt-3 mt-md-0">
+                        <label asp-for="Password">Enter Patient's Password</label>
+                        <input type="text" id="password" asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    @*<div class="col-md-4 form-group mt-3 mt-md-0">
+                        <label class="label">Assigned Doctor</label>   <input type="text" id="Doctor" name="Doctor" class="form-control" />
+                    </div>*@
+                    
+                </div>
+                @*<div class="row form-row">
+                    <div class="col-md-4 form-group mt-3 mt-md-0">
+                        <label class="label">Assigned Doctor</label>   <input type="text" name="Doctor" class="form-control" />
+                    </div>
+                    <div class="col-md-4 form-group mt-3 mt-md-0 form-col">
+                        <label class="label">Enter Patient Room</label>   <input type="text" name="RoomNo" class="form-control" />
+                    </div>
+                </div>*@
+
+                <div class="text-center bttn">
+                <button type="submit" onclick="PatientAdd();">Add Patient</button >
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+@if (ViewData["AdminUserName"] != null)
+{
+    @section LoginReplacement
+    {
+
+        <h>@ViewData["AdminUserName"] </h>
+    }
+}

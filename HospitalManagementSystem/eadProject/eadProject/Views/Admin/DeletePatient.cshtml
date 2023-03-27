@@ -1,0 +1,27 @@
+﻿@model eadProject.Models.Patient
+<section id="appointment" class="appointment section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Delete Patient</h2>
+        </div>
+
+        <form method="post" asp-controller="Admin" asp-action="DeletePatient">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="row form-row" style="padding-left: 13cm;">
+                <div class="col-md-4 form-group mt-3 mt-md-0 ">
+                    <label asp-for="Id" class="label">Enter Patient ID</label>   <input type="text" asp-for="Id" name="Id" class="form-control" />
+                    <span asp-validation-for="Id"></span>
+                </div>
+            </div>
+            <div class="bttn text-center">
+                <input type="submit" value="Delete Patient" />
+            </div>
+        </form>
+    </div>
+</section>
+@section LoginReplacement
+    {
+
+                                   <h>  @ViewData["AdminUserName"] </h>
+    }

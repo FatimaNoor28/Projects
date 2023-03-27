@@ -1,0 +1,60 @@
+﻿
+<script>
+    function uploadReport(){
+        var input = document.getElementsByName("postedFiles");
+        var files = input.files;
+        var formData = new FormData();
+
+        for(var i=0;i!=files.length; i++){
+            formData.append("files", files[i]);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/uploadPatientReport",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(eg){
+                console.log(eg);
+            }
+        });
+    }
+
+</script>
+
+
+<section id="appointment" class="appointment section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Upload Patient's Report</h2>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+              
+
+            <div class="row form-row" style="padding-left: 13cm;">
+                <div class="col-md-4 form-group mt-3 mt-md-0 ">
+
+                    <span>Select File: </span>
+                    <input type="file" name="postedFiles" multiple />
+                </div>
+            </div>
+            <div class="row form-row" style="padding-left: 13cm;">
+                <div class="col-md-4 form-group mt-3 mt-md-0 ">
+                    <label class="label">Patient ID</label>   <input type="text" name="PatientId" class="form-control" />
+                </div>
+            </div>
+            <div class="bttn text-center">
+                <button type="submit" onclick="uploadReport();">Upload File(s)</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+
+@section LoginReplacement
+    {
+
+    <h>  @ViewData["AdminUserName"] </h>
+    }

@@ -1,0 +1,44 @@
+﻿@using eadProject.Models
+@model eadProject.Models.Patient
+
+<script>
+    function findPatient(){
+        var data = $("#Id").val();
+        console.log(data);
+        $.ajax({
+            type: "GET",
+            url: "/Admin/FindPatient",
+            contentType: "application/json; charset=utf-8",
+            data: data,
+            success: function(succ){
+                console.log(succ);
+            }
+        });
+    }
+</script>
+
+<section id="appointment" class="appointment section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Find Patient</h2>
+        </div>
+
+        <form  method = "post">
+            <div class="row form-row" style="padding-left: 13cm;">
+                <div class="col-md-4 form-group mt-3 mt-md-0 ">
+                    <label asp-for="Id" class="label">Enter Patient ID</label>   <input asp-for="Id" type="text" name="Id" class="form-control" />
+                    <span asp-validation-for="Id"></span>
+                </div>
+            </div>
+            <div class="bttn text-center">
+                <button type="submit" onclick="findPatient();">Find Patient</button>
+            </div>
+        </form>
+    </div>
+</section>
+@section LoginReplacement
+    {
+
+                                   <h>  @ViewData["AdminUserName"] </h>
+    }

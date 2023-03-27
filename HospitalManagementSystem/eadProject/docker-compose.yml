@@ -1,0 +1,26 @@
+version: '3.4'
+
+networks:
+  HMS:
+
+services:
+  eadproject:
+    image: ${DOCKER_REGISTRY-}eadproject
+    build:
+      context: .
+      dockerfile: eadProject/Dockerfile
+    ports:
+        - "8000:80"
+    depends_on: 
+        - backend
+    networks:
+        - HMS
+  backend:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+        SA_PASSWORD: "Docker123!"
+        ACCEPT_EULA: "Y"
+    ports:
+        - "1440:1433"
+    networks: 
+        - HMS
